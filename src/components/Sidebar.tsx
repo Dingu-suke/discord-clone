@@ -48,7 +48,7 @@ const Sidebar = () => {
             <div className='sidebarAccount'>
               <img src='./icon_hinoarashi.png' alt="" />
               <div className='accountName'>
-                <h4>Dngu</h4>
+                <h4>Dingu</h4>
                 <span>#0505</span>
               </div>
             </div>
