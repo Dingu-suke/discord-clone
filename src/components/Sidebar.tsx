@@ -26,7 +26,7 @@ const Sidebar = () => {
       {/* sidebarRight */}
       <div className="sidebarRight">
         <div className='sidebarTop'>
-          <h3>discord</h3>
+          <h3>Discord</h3>
           <ExpandMoreIcon />
         </div>
         <div className='sidebarChannels'>
