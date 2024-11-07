@@ -4,11 +4,22 @@ import './Sidebar.scss'
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      {/* sidebarRight */}
-      <div className="sidebarRight">
-      </div>
+
       {/* sidebarLeft */}
       <div className="sidebarLeft">
+        <div className='serverIcon'>
+          <img src='./logo192.png' alt="" />
+        </div>
+        <div className='serverIcon'>
+          <img src='./logo192.png' alt="" />
+        </div>
+      </div>
+
+      {/* sidebarRight */}
+      <div className="sidebarRight">
+        <div className='sidebarTop'>
+          discord
+        </div>
       </div>
     </div>
   )
