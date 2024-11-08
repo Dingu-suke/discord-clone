@@ -19,12 +19,23 @@
       margin-bottom: 10px;
       position: relative;
       margin-top: 7px;
+
       img {
         position: absolute;
         width: 50px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        transition: filter 0.3s ease; // トランジション効果を追加
+        cursor: pointer;
+
+        filter: brightness(0.9);
+        &:hover {
+          filter: brightness(1.2); // 明るさを20%増加
+          // または以下のような効果も選択できます：
+          // filter: brightness(1.2) contrast(1.1); // コントラストも少し上げる
+          // filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)); // 光る効果
+        }
       }
     }
   }
