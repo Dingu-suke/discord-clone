@@ -4,4 +4,45 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  
+  .chatHeaderLeft {
+    padding-left: 15px;
+    
+    .chatHeaderHash {
+      color: #7b7c85;
+      padding-right: 7px;
+    }
+
+    h3 {
+      color: #fff;
+    }
+  }
+
+  .chatHeaderRight {
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: gray;
+    
+    .chatHeaderSearch {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      color: gray;      
+      padding: 3px;
+      border-radius: 3px;
+
+      .input {
+        background: transparent;
+        border: none;
+        color: white;
+        outline: none;
+      }
+      
+    }
+    .MuiSvgIcon-root {
+      cursor: pointer;
+    }
+  }
 }
