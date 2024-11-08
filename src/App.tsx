@@ -3,6 +3,7 @@ import './App.scss';
 import Sidebar from './components/Sidebar';
 import Chat from './components/chat/Chat';
 
+// (コミット用)
 
 function App() {
   return (
