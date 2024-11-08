@@ -4,4 +4,38 @@
   background-color: #36393f;
   flex-direction: column;
   height: 100vh;
+
+  .chatInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    color: lightgray;
+    background-color: #474b53;
+    border-radius: 5px;
+    margin: 20px;
+
+    form {
+      flex-grow: 1;
+      input {
+        padding: 15px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: large;
+        width: 100%;
+        color: white;
+        height: 12px;
+      }
+      .chatInputButton {
+        display: none;
+      }
+    }
+    .chatInputIcons {
+      display: flex;
+      gap: 10px;
+    }
+
+  }
+  
 }
