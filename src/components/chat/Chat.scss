@@ -5,6 +5,10 @@
   flex-direction: column;
   height: 100vh;
 
+  .chatMessages {
+    flex-grow: 1;
+  }
+
   .chatInput {
     display: flex;
     align-items: center;
