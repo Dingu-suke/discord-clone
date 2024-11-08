@@ -21,7 +21,7 @@ const ChatHeader = () => {
         <PushPinIcon />
         <PeopleAltIcon />
         <div className="chatHeaderSearch">
-          <input type="text" placeholder='Search' />
+          <input className='input' type="text" placeholder='Search' />
           <SearchIcon />
         </div>
         <SendIcon />
