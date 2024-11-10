@@ -4,3 +4,5 @@ import userReducer from '../features/userSlice'
 const store = configureStore({ 
   reducer: userReducer
 })
+
+export default store
