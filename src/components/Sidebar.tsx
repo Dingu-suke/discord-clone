@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Sidebar.scss'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,11 +8,15 @@ import MicOffIcon from '@mui/icons-material/MicOff';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Logout } from '@mui/icons-material';
+import { useAppSelector } from '../app/hooks';
 
 const Sidebar = () => {
+  
+  const user = useAppSelector(state => state.user)
+
   return (
     <div className="sidebar">
-
       {/* sidebarLeft */}
       <div className="sidebarLeft">
         <div className='serverIcon'>
@@ -20,6 +24,9 @@ const Sidebar = () => {
         </div>
         <div className='serverIcon'>
           <img src='./discordIcon.png' alt="" />
+        </div>
+        <div className='logoutIcon'>
+          <Logout />
         </div>
       </div>
 
@@ -46,10 +53,10 @@ const Sidebar = () => {
 
           <div className='sidebarFooter'>
             <div className='sidebarAccount'>
-              <img src='./icon_hinoarashi.png' alt="" />
+              <img src={user?.photo} alt="" />
               <div className='accountName'>
-                <h4>Dingu</h4>
-                <span>#0505</span>
+                <h4>{user?.displayName}</h4>
+                <span>#{user?.uid.substring(0, 4)}</span>
               </div>
             </div>
             <div className='sidebarVoice'>

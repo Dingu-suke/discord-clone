@@ -11,7 +11,7 @@ import { login, logout } from './features/userSlice';
 
 function App() {
 
-  const user = useAppSelector((state) => state.user)
+  const user = useAppSelector((state) => state.user);
   console.log(user); 
 
   const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ function App() {
             uid: loginUser.uid,
             photo: loginUser.photoURL,
             email: loginUser.email,
-            dispalayName: loginUser.displayName
+            displayName: loginUser.displayName
           }))
       } else {
         dispatch(logout())
