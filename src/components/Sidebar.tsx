@@ -23,7 +23,7 @@ const Sidebar = () => {
     onSnapshot(q, (QuerySnapshot) => {
       const channelsResults = [];
       QuerySnapshot.docs.forEach((doc) => console.log(doc))
-    } )
+    })
   }, [])
 
   return (

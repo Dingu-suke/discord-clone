@@ -12,7 +12,6 @@ import { login, logout } from './features/userSlice';
 function App() {
 
   const user = useAppSelector((state) => state.user);
-  console.log(user); 
 
   const dispatch = useAppDispatch()
 
