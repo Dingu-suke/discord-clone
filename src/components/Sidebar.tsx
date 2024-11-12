@@ -10,10 +10,21 @@ import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Logout } from '@mui/icons-material';
 import { useAppSelector } from '../app/hooks';
+import { auth, db } from './firebase';
+import { collection, onSnapshot, query, QuerySnapshot } from 'firebase/firestore';
 
 const Sidebar = () => {
   
   const user = useAppSelector(state => state.user)
+
+  const q = query(collection(db, 'channels'))
+
+  useEffect(() => {
+    onSnapshot(q, (QuerySnapshot) => {
+      const channelsResults = [];
+      QuerySnapshot.docs.forEach((doc) => console.log(doc))
+    })
+  }, [])
 
   return (
     <div className="sidebar">
@@ -25,8 +36,8 @@ const Sidebar = () => {
         <div className='serverIcon'>
           <img src='./discordIcon.png' alt="" />
         </div>
-        <div className='logoutIcon'>
-          <Logout />
+        <div className='logoutIcon' onClick={() => auth.signOut()}>
+          <Logout/>
         </div>
       </div>
 
