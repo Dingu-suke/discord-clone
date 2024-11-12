@@ -10,11 +10,21 @@ import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Logout } from '@mui/icons-material';
 import { useAppSelector } from '../app/hooks';
-import { auth } from './firebase';
+import { auth, db } from './firebase';
+import { collection, onSnapshot, query, QuerySnapshot } from 'firebase/firestore';
 
 const Sidebar = () => {
   
   const user = useAppSelector(state => state.user)
+
+  const q = query(collection(db, 'channels'))
+
+  useEffect(() => {
+    onSnapshot(q, (QuerySnapshot) => {
+      const channelsResults = [];
+      QuerySnapshot.docs.forEach((doc) => console.log(doc))
+    } )
+  }, [])
 
   return (
     <div className="sidebar">
