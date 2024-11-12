@@ -10,6 +10,7 @@ import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Logout } from '@mui/icons-material';
 import { useAppSelector } from '../app/hooks';
+import { auth } from './firebase';
 
 const Sidebar = () => {
   
@@ -25,8 +26,8 @@ const Sidebar = () => {
         <div className='serverIcon'>
           <img src='./discordIcon.png' alt="" />
         </div>
-        <div className='logoutIcon'>
-          <Logout />
+        <div className='logoutIcon' onClick={() => auth.signOut()}>
+          <Logout/>
         </div>
       </div>
 
