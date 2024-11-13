@@ -26,17 +26,23 @@ const Sidebar = () => {
 
   const q = query(collection(db, 'channels'))
   
+  // useEffect(() => {
+  //   onSnapshot(q, (querySnapshot) => {
+  //     const channelsResults: Channel[] = [];
+  //     querySnapshot.docs.forEach((doc) =>
+  //       channelsResults.push({
+  //         id: doc.id,
+  //         channel: doc.data(), 
+  //       })
+  //     )
+  //     setChannels(channelsResults);
+  //   })
+  // }, [])
+
   useEffect(() => {
-    onSnapshot(q, (querySnapshot) => {
-      const channelsResults: Channel[] = [];
-      querySnapshot.docs.forEach((doc) =>
-        console.log(doc)
-        // channelsResults.push({
-        //   id: doc.id,
-        //   channel: doc.data(), 
-        // })
-      )
-      // setChannels(channelsResults);
+    onSnapshot(q, (QuerySnapshot) => {
+      const channelsResults = [];
+      QuerySnapshot.docs.forEach((doc) => console.log(doc))
     })
   }, [])
 
