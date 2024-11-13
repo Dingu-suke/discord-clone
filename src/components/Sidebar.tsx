@@ -23,26 +23,18 @@ const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([])
   
   const user = useAppSelector(state => state.user)
-
   const q = query(collection(db, 'channels'))
   
-  // useEffect(() => {
-  //   onSnapshot(q, (querySnapshot) => {
-  //     const channelsResults: Channel[] = [];
-  //     querySnapshot.docs.forEach((doc) =>
-  //       channelsResults.push({
-  //         id: doc.id,
-  //         channel: doc.data(), 
-  //       })
-  //     )
-  //     setChannels(channelsResults);
-  //   })
-  // }, [])
-
   useEffect(() => {
-    onSnapshot(q, (QuerySnapshot) => {
-      const channelsResults = [];
-      QuerySnapshot.docs.forEach((doc) => console.log(doc))
+    onSnapshot(q, (querySnapshot) => {
+      const channelsResults: Channel[] = [];
+      querySnapshot.docs.forEach((doc) =>
+        channelsResults.push({
+          id: doc.id,
+          channel: doc.data(), 
+        })
+      )
+      setChannels(channelsResults);
     })
   }, [])
 
@@ -76,10 +68,10 @@ const Sidebar = () => {
             <AddIcon className='sidebarAddIcon'/>
           </div>
           <div className='sidebarChannelsList'>
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
+            {channels.map(channel => (
+              <SidebarChannel />  
+            )
+            )}
           </div>
 
           <div className='sidebarFooter'>
