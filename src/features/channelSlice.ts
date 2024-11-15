@@ -13,7 +13,7 @@ export const channelSlice = createSlice({
   reducers: {
     setChannelsInfo: (state, action) => {
       state.channelId = action.payload.channelId
-      state.channelName = action.payload.channelId
+      state.channelName = action.payload.channelName
     }
   },
 })
