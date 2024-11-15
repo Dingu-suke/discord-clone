@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Chat.scss';
 import ChatHeader from './ChatHeader';
 import { AddCircleOutline } from '@mui/icons-material';
@@ -10,13 +10,20 @@ import { useAppSelector } from '../../app/hooks';
 
 
 const Chat = () => {
+  const [ inputText, setInputText ] = useState<string>("");
+  
   const channelName = useAppSelector((state) => state.channel.channelName)
+
+  const sendMessage = (event: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLButtonElement, EventTarget>) => {
+    event.preventDefault()
+    console.log("sendMessage")
+  }
 
   return (
   <div className="chat">
       {/* chat header */}
-      {/* chat messages */}
       <ChatHeader channelName={channelName} />
+      {/* chat messages */}8
       <div className='chatMessages'>
         <ChatMessage />
         <ChatMessage />
@@ -27,8 +34,12 @@ const Chat = () => {
         <div className='chatInput'>
           <AddCircleOutline fontSize='large' />
           <form>
-            <input type="text" placeholder='messege to #Udemy' />
-            <button type='submit' className='chatInputButton'>Send</button>
+            <input type="text" placeholder='messege to #Udemy' 
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setInputText(event.target.value)} />
+            <button type='submit' className='chatInputButton' 
+                    onClick={(event: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLButtonElement, EventTarget>) => 
+                      sendMessage(event)}>Send</button>
           </form>
           <div className='chatInputIcons'>
             <CardGiftcardIcon />
