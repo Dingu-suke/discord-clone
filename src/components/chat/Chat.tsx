@@ -10,13 +10,13 @@ import { useAppSelector } from '../../app/hooks';
 
 
 const Chat = () => {
-  const channelName = useAppSelector((state) => state)
+  const channelName = useAppSelector((state) => state.channel.channelName)
 
   return (
   <div className="chat">
       {/* chat header */}
       {/* chat messages */}
-      <ChatHeader />
+      <ChatHeader channelName={channelName} />
       <div className='chatMessages'>
         <ChatMessage />
         <ChatMessage />
