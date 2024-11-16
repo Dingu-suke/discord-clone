@@ -27,6 +27,7 @@ const Chat = () => {
     channelコレクション  ---->  messageコレクション  ---->  ⭐️メッセージ情報を入れる    */
 
     if (inputText.trim() === "") return;
+    if (!channelName) return
     const collectionRef: CollectionReference<DocumentData> = collection(
       db,
       "channels",
@@ -63,7 +64,7 @@ const Chat = () => {
         <div className='chatInput'>
           <AddCircleOutline fontSize='large' />
           <form>
-            <input type="text" placeholder='messege to #Udemy' 
+            <input type="text" placeholder={ channelName ?`messege to # ${channelName}`: '部屋を選択してください' }
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   setInputText(event.target.value)} 
                 value={inputText}
