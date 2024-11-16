@@ -7,7 +7,7 @@ import GifIcon from '@mui/icons-material/Gif';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ChatMessage from './ChatMessage';
 import { useAppSelector } from '../../app/hooks';
-import { addDoc, collection, CollectionReference, DocumentData, DocumentReference, onSnapshot, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, CollectionReference, DocumentData, DocumentReference, onSnapshot, orderBy, query, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
 interface Messages {
@@ -35,9 +35,15 @@ const Chat = () => {
       "channels",
       String(channelId),
       "messages"
-    );    
+    );
 
-    onSnapshot(collectionRef, (snapshot) => {
+    // チャットをソートする
+    const collectionRefOrderBy = query(
+      collectionRef,
+      orderBy("timestamp", "asc")
+    ) 
+
+    onSnapshot(collectionRefOrderBy, (snapshot) => {
       let results: Messages[] = [];
       snapshot.docs.forEach((doc) => {
         results.push({
@@ -47,7 +53,6 @@ const Chat = () => {
         })      
       })
       setMessages(results)
-      console.log(results);
     })
   }, [channelId])
 
@@ -57,6 +62,7 @@ const Chat = () => {
     [ やりたいこと ]
     channelコレクション  ---->  messageコレクション  ---->  ⭐️メッセージ情報を入れる    */
 
+    if (inputText.trim() === "") return;
     const collectionRef: CollectionReference<DocumentData> = collection(
       db,
       "channels",
@@ -71,7 +77,7 @@ const Chat = () => {
         user: user
       }
     )
-    console.log(docRef);
+    setInputText("")
   }
 
   return (
@@ -88,9 +94,6 @@ const Chat = () => {
             user={message.user}
           />
         ))}
-        {/* <ChatMessage />
-        <ChatMessage />
-        <ChatMessage /> */}
       </div>
       {/* chat input */}
         <div className='chatInput'>
@@ -98,7 +101,9 @@ const Chat = () => {
           <form>
             <input type="text" placeholder='messege to #Udemy' 
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setInputText(event.target.value)} />
+                  setInputText(event.target.value)} 
+                value={inputText}
+              />
             <button type='submit' className='chatInputButton' 
                     onClick={(event: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLButtonElement, EventTarget>) => 
                       sendMessage(event)}>Send</button>
