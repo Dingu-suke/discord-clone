@@ -52,19 +52,10 @@ const Chat = () => {
   }, [channelId])
 
   const sendMessage = async (event: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLButtonElement, EventTarget>) => {
-    event.preventDefault()    
-    
-    /*
-
+    event.preventDefault()        
+    /*  
     [ やりたいこと ]
-    
-    channelコレクション
-        |
-        └------- messageコレクション
-                        |
-                        └---------- ⭐️ メッセージ情報を入れる
-
-     */
+    channelコレクション  ---->  messageコレクション  ---->  ⭐️メッセージ情報を入れる    */
 
     const collectionRef: CollectionReference<DocumentData> = collection(
       db,
@@ -89,10 +80,17 @@ const Chat = () => {
       <ChatHeader channelName={channelName} />
       {/* chat messages */}
       <div className='chatMessages'>
+        {messages.map((message, index) => (
+          <ChatMessage 
+            key={index}
+            message={message.message}
+            timestamp={message.timestamp}
+            user={message.user}
+          />
+        ))}
+        {/* <ChatMessage />
         <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
+        <ChatMessage /> */}
       </div>
       {/* chat input */}
         <div className='chatInput'>
