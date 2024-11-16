@@ -9,52 +9,16 @@ import ChatMessage from './ChatMessage';
 import { useAppSelector } from '../../app/hooks';
 import { addDoc, collection, CollectionReference, DocumentData, DocumentReference, onSnapshot, orderBy, query, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
-
-interface Messages {
-  timestamp: Timestamp;
-  message: string;
-  user : {
-    uid : string,
-    photo : string,
-    email : string,
-    displayName : string,
-  }
-}
+import useSubCollection from '../../hooks/useSubCollection';
 
 const Chat = () => {
   const [ inputText, setInputText ] = useState<string>("");
-  const [ messages, setMessages ] = useState<Messages[]>([])
   
   const channelName = useAppSelector((state) => state.channel.channelName)
   const channelId = useAppSelector((state) => state.channel.channelId);
   const user = useAppSelector((state) => state.user.user)
 
-  useEffect(() => {
-    let collectionRef = collection(
-      db,
-      "channels",
-      String(channelId),
-      "messages"
-    );
-
-    // チャットをソートする
-    const collectionRefOrderBy = query(
-      collectionRef,
-      orderBy("timestamp", "asc")
-    ) 
-
-    onSnapshot(collectionRefOrderBy, (snapshot) => {
-      let results: Messages[] = [];
-      snapshot.docs.forEach((doc) => {
-        results.push({
-          timestamp: doc.data().timestamp,
-          message: doc.data().message,
-          user: doc.data().user
-        })      
-      })
-      setMessages(results)
-    })
-  }, [channelId])
+  const { subDocuments: messages } = useSubCollection("channels", "messages");
 
   const sendMessage = async (event: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLButtonElement, EventTarget>) => {
     event.preventDefault()        
